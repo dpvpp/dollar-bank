@@ -12,7 +12,7 @@ public class ConsolePrinterUtility {
 		System.out.println("1. Create new Account");
 		System.out.println("2. Login");
 		System.out.println("3. Exit");
-		System.out.println("Select and option by typing 1, 2, or 3");
+		System.out.println("Select an option by typing 1, 2, or 3");
 	}
 	
 }
