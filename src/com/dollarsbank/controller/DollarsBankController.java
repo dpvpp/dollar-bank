@@ -10,7 +10,11 @@ public class DollarsBankController {
 	public static List<Customer> customers = new ArrayList<Customer>();
 	
 	public static Customer createCustomer(String firstName, String lastName, String phoneNumber, String userId, String password) {
-		return new Customer(firstName, lastName, phoneNumber, userId, password);
+		
+		Customer customer = new Customer(firstName, lastName, phoneNumber, userId, password);
+		customers.add(customer);
+		return customer;
+		
 	}
 	
 }
