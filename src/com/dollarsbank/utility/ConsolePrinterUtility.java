@@ -39,6 +39,12 @@ public class ConsolePrinterUtility {
 		System.out.println("+------------------------------------+" + ColorsUtility.RESET.COLOR);
 	}
 	
+	public static void loginBanner() {
+		System.out.println(ColorsUtility.BLUE.COLOR + "+-------------------------------------------+");
+		System.out.println("| Welcome! Please Enter login details below |");
+		System.out.println("+------------------------------------------+" + ColorsUtility.RESET.COLOR);
+	}
+	
 	public static void exitScreen() {
 		System.out.println(ColorsUtility.GREEN.COLOR + "+--------------------------------------------------------+");
 		System.out.println("|                                                  " + ColorsUtility.YELLOW.COLOR  + "O" + ColorsUtility.GREEN.COLOR + "     |");

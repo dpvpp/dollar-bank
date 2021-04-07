@@ -16,7 +16,7 @@ public class DollarsBankApplication {
 		mainMenu();
 	}
 	
-	public static void mainMenu() {
+	private static void mainMenu() {
 		Scanner in = new Scanner(System.in);
 		boolean exit = false;
 		while(!exit) {
@@ -30,6 +30,9 @@ public class DollarsBankApplication {
 				switch(input) { 
 					case 1 : 
 						createAccount(in);
+						break;
+					case 2 :
+						login(in);
 						break;
 					case 3 :
 						ConsolePrinterUtility.exitScreen();
@@ -48,7 +51,7 @@ public class DollarsBankApplication {
 		in.close();
 	}
 	
-	public static void createAccount(Scanner in) {
+	private static void createAccount(Scanner in) {
 		ConsolePrinterUtility.createAccountBanner();
 		String firstName;
 		String lastName;
@@ -97,4 +100,17 @@ public class DollarsBankApplication {
 		
 	}
 	
+	private static void login(Scanner in) {
+		ConsolePrinterUtility.loginBanner();
+		String userId;
+		String password;
+		
+		System.out.println("Please enter your username");
+		ConsolePrinterUtility.inputArrow();
+		userId = in.nextLine();
+		
+		System.out.println("Please enter your password");
+		ConsolePrinterUtility.inputArrow();
+		userId = in.nextLine();
+	}
 }
