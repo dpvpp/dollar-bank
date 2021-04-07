@@ -18,7 +18,7 @@ public class ConsolePrinterUtility {
 	public static void printInvalidOption() {
 		System.out.println(ColorsUtility.RED.COLOR + "+---------------------------------------------------------------+");
 		System.out.println("| WARNING! The option you have selected is not valid, try again |");
-		System.out.println("+---------------------------------------------------------------+" + ColorsUtility.RESET.COLOR);
+		System.out.println("+-----------------------------------------------------------------+" + ColorsUtility.RESET.COLOR);
 	}
 	
 	public static void createAccountBanner() {
@@ -30,19 +30,19 @@ public class ConsolePrinterUtility {
 	public static void printInvalidPhoneNumber() {
 		System.out.println(ColorsUtility.RED.COLOR + "+--------------------------------------------------------------------------+");
 		System.out.println("| WARNING! The phone number you have entered is not valid please try again |");
-		System.out.println("+------------------------------------------------------------------------+" + ColorsUtility.RESET.COLOR);
+		System.out.println("+--------------------------------------------------------------------------+" + ColorsUtility.RESET.COLOR);
 	}
 	
 	public static void printInvalidAmount() {
 		System.out.println(ColorsUtility.RED.COLOR + "+--------------------------------------+");
 		System.out.println("| WARNING! Please enter a valid amount |");
-		System.out.println("+------------------------------------+" + ColorsUtility.RESET.COLOR);
+		System.out.println("+--------------------------------------+" + ColorsUtility.RESET.COLOR);
 	}
 	
 	public static void loginBanner() {
 		System.out.println(ColorsUtility.BLUE.COLOR + "+-------------------------------------------+");
 		System.out.println("| Welcome! Please Enter login details below |");
-		System.out.println("+------------------------------------------+" + ColorsUtility.RESET.COLOR);
+		System.out.println("+-------------------------------_-----------+" + ColorsUtility.RESET.COLOR);
 	}
 	
 	public static void exitScreen() {
