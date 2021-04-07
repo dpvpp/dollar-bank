@@ -7,14 +7,16 @@ public class Customer {
 	private String phoneNumber;
 	private String userId;
 	private String password;
+	private Account account;
 	
-	public Customer(String firstName, String lastName, String phoneNumber, String userId, String password) {
+	public Customer(String firstName, String lastName, String phoneNumber, String userId, String password, long initDeposit) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.userId = userId;
 		this.password = password;
+		this.setAccount(new Account(initDeposit));
 	}
 
 	public String getFirstName() {
@@ -55,6 +57,14 @@ public class Customer {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 	
 }
