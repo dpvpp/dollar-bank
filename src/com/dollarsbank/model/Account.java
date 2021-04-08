@@ -7,10 +7,17 @@ public class Account {
 	
 	private long balance;
 	private List<Transaction> transactions;
+	private String userId;
 	
-	Account() {
+	public Account() {
 		this.balance = 0;
 		this.transactions = new ArrayList<Transaction>();
+	}
+	
+	public Account(long balance, String userId) {
+		this.balance = balance;
+		this.transactions = new ArrayList<Transaction>();
+		this.userId = userId;
 	}
 	
 	Account(long initBalance) {
@@ -36,6 +43,10 @@ public class Account {
 
 	public List<Transaction> getTransactions() {
 		return transactions;
+	}
+
+	public String getUserId() {
+		return userId;
 	}
 	
 }
