@@ -55,6 +55,12 @@ public class ConsolePrinterUtility {
 		System.out.println("+--------------------------------------------------------+" + ColorsUtility.RESET.COLOR);
 	}
 	
+	public static void printSQLError() {
+		System.out.println(ColorsUtility.RED.COLOR + "+--------------------------------------------------------+");
+		System.out.println("| WARNING! There was an error connecting to the database |");
+		System.out.println("+--------------------------------------------------------+" + ColorsUtility.RESET.COLOR);
+	}
+	
 	public static void inputArrow() {
 		System.out.print("> ");
 	}

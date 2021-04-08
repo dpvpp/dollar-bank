@@ -11,6 +11,6 @@ public interface AccountDAO {
 	
 	public Account updateAccount(Account account);
 	
-	public boolean deleteAccountById(int id);
+	public boolean deleteAccountByUser(String username);
 	
 }
