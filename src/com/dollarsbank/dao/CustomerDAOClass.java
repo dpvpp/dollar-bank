@@ -57,7 +57,11 @@ public class CustomerDAOClass implements CustomerDAO{
 			ResultSet rs = st.executeQuery();
 			
 			if(rs.next()) {
-				customer = new Customer(rs.getString("firstname"), rs.getString("lastname"), rs.getString("phone"), rs.getNString("username"), rs.getString("cust_pw"), 0);
+				customer = new Customer(rs.getString("firstname"), 
+										rs.getString("lastname"), 
+										rs.getString("phone"), 
+										rs.getNString("username"), 
+										rs.getString("cust_pw"), 0);
 			}
 			
 		} catch (SQLException e) {
