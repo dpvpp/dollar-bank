@@ -56,7 +56,7 @@ public class AccountDAOClass implements AccountDAO {
 			ResultSet rs = st.executeQuery();
 			
 			if(rs.next()) {
-				account = new Account(rs.getLong("balance"), rs.getString("username"));
+				account = new Account(rs.getInt("accunt_id"), rs.getLong("balance"), rs.getString("username"));
 			}
 			
 		} catch (SQLException e) {
@@ -78,7 +78,7 @@ public class AccountDAOClass implements AccountDAO {
 			ResultSet rs = st.executeQuery();
 			
 			if(rs.next()) {
-				account = new Account(rs.getLong("balance"), rs.getString("username"));
+				account = new Account(rs.getInt("accunt_id"), rs.getLong("balance"), rs.getString("username"));
 			}
 			
 		} catch (SQLException e) {

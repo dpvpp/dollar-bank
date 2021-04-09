@@ -1,6 +1,6 @@
 package com.dollarsbank.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Transaction {
 	
@@ -17,15 +17,15 @@ public class Transaction {
 	private int id;
 	private TransType type;
 	private long amount;
-	private Date date;
+	private LocalDateTime date;
 	private int accountId;
 	
-	public Transaction(int id, TransType type, long amount, int accountId) {
+	public Transaction(int id, TransType type, long amount, LocalDateTime date, int accountId) {
 		super();
 		this.id = id;
 		this.type = type;
 		this.amount = amount;
-		this.date = new Date();
+		this.date = date;
 		this.accountId = accountId;
 	}
 
@@ -41,7 +41,7 @@ public class Transaction {
 		return amount;
 	}
 
-	public Date getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 

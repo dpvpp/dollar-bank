@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Account {
 	
+	private int id;
 	private long balance;
 	private List<Transaction> transactions;
 	private String userId;
@@ -14,7 +15,8 @@ public class Account {
 		this.transactions = new ArrayList<Transaction>();
 	}
 	
-	public Account(long balance, String userId) {
+	public Account(int id, long balance, String userId) {
+		this.id = id;
 		this.balance = balance;
 		this.transactions = new ArrayList<Transaction>();
 		this.userId = userId;
@@ -40,6 +42,10 @@ public class Account {
 	public void addTransaction(Transaction trans) {
 		transactions.add(trans);
 	}
+	
+	public void setTransaction(List<Transaction> transactions) {
+		this.transactions = transactions;
+	}
 
 	public List<Transaction> getTransactions() {
 		return transactions;
@@ -47,6 +53,10 @@ public class Account {
 
 	public String getUserId() {
 		return userId;
+	}
+
+	public int getId() {
+		return id;
 	}
 	
 }
