@@ -34,7 +34,7 @@ public class AccountDAOClass implements AccountDAO {
 			st.setString(2, account.getUserId());
 			
 			if(st.execute()) {
-				return account;
+				return getAccountByUserName(account.getUserId());
 			}
 			
 		} catch (SQLException e) {

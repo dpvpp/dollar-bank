@@ -29,6 +29,14 @@ public class Transaction {
 		this.accountId = accountId;
 	}
 
+	public Transaction(TransType type, long amount, int accountId) {
+		super();
+		this.type = type;
+		this.amount = amount;
+		this.date = LocalDateTime.now();
+		this.accountId = accountId;
+	}
+	
 	public int getId() {
 		return id;
 	}

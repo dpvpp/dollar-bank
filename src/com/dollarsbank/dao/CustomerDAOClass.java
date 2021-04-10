@@ -69,6 +69,29 @@ public class CustomerDAOClass implements CustomerDAO{
 		}
 		return customer;
 	}
+	
+
+
+	@Override
+	public boolean existsByUserName(String username) {
+
+		boolean exists = false;
+		try {
+			
+			PreparedStatement st = conn.prepareStatement(SELECT_BY_ID);
+			st.setString(1, username);
+			
+			ResultSet rs = st.executeQuery();
+			
+			if(rs.next()) {
+				exists = true;
+			}
+			
+		} catch (SQLException e) {
+			ConsolePrinterUtility.printSQLError();
+		}
+		return exists;
+	}
 
 	@Override
 	public Customer updateCustomer(Customer customer) {
