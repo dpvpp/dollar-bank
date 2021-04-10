@@ -16,7 +16,7 @@ public class Customer {
 		this.phoneNumber = phoneNumber;
 		this.userId = userId;
 		this.password = password;
-		this.setAccount(new Account(initDeposit));
+		this.setAccount(new Account(initDeposit, userId));
 	}
 
 	public String getFirstName() {

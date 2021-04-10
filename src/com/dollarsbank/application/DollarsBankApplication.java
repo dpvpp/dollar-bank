@@ -111,6 +111,8 @@ public class DollarsBankApplication {
 		
 		System.out.println("Please enter your password");
 		ConsolePrinterUtility.inputArrow();
-		userId = in.nextLine();
+		password = in.nextLine();
+		
+		System.out.println(userId + password);
 	}
 }

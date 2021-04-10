@@ -22,8 +22,11 @@ public class Account {
 		this.userId = userId;
 	}
 	
-	Account(long initBalance) {
+	Account(long initBalance, String userId) {
+		this.transactions = new ArrayList<Transaction>();
 		this.balance = initBalance;
+		this.transactions = new ArrayList<Transaction>();
+		this.userId = userId;
 	}
 	
 	public long getBalance() {
