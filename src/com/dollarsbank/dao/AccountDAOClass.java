@@ -33,9 +33,8 @@ public class AccountDAOClass implements AccountDAO {
 			st.setLong(1, account.getBalance());
 			st.setString(2, account.getUserId());
 			
-			if(st.execute()) {
-				return getAccountByUserName(account.getUserId());
-			}
+			st.execute();
+			return getAccountByUserName(account.getUserId());
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();
@@ -56,7 +55,7 @@ public class AccountDAOClass implements AccountDAO {
 			ResultSet rs = st.executeQuery();
 			
 			if(rs.next()) {
-				account = new Account(rs.getInt("accunt_id"), rs.getLong("balance"), rs.getString("username"));
+				account = new Account(rs.getInt("account_id"), rs.getLong("balance"), rs.getString("username"));
 			}
 			
 		} catch (SQLException e) {
@@ -78,7 +77,7 @@ public class AccountDAOClass implements AccountDAO {
 			ResultSet rs = st.executeQuery();
 			
 			if(rs.next()) {
-				account = new Account(rs.getInt("accunt_id"), rs.getLong("balance"), rs.getString("username"));
+				account = new Account(rs.getInt("account_id"), rs.getLong("balance"), rs.getString("username"));
 			}
 			
 		} catch (SQLException e) {
@@ -95,10 +94,9 @@ public class AccountDAOClass implements AccountDAO {
 			
 			PreparedStatement st = conn.prepareStatement(UPDATE);
 			st.setString(1, account.getUserId());
-			
-			if(st.execute()) {
-				return account;
-			}
+
+			st.execute();
+			return account;
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();
@@ -115,7 +113,8 @@ public class AccountDAOClass implements AccountDAO {
 			PreparedStatement st = conn.prepareStatement(DELETE);
 			st.setString(1, username);
 			
-			return st.execute();
+			st.execute();
+			return true;
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();

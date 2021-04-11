@@ -5,7 +5,11 @@ import java.time.LocalDateTime;
 public class Transaction {
 	
 	public enum TransType {
-		DEPOSIT("deposit"), WITHDRAWAL("withdrawal"), INCOMING_TRANSFER("incoming transfer"), OUTGOING_TRANSFER("outgoing transfer");
+		DEPOSIT("deposit"), 
+		WITHDRAWAL("withdrawal"), 
+		INCOMING_TRANSFER("incoming transfer"), 
+		OUTGOING_TRANSFER("outgoing transfer"),
+		INITIAL_DEPOSIT("initial deposit");
 		
 		public final String VALUE;
 		
