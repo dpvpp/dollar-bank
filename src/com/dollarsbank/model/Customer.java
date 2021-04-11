@@ -9,7 +9,7 @@ public class Customer {
 	private String password;
 	private Account account;
 	
-	public Customer(String firstName, String lastName, String phoneNumber, String userId, String password, long initDeposit) {
+	public Customer(String firstName, String lastName, String phoneNumber, String userId, String password, double initDeposit) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;

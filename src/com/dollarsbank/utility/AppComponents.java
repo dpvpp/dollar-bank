@@ -1,9 +1,12 @@
 package com.dollarsbank.utility;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.dollarsbank.controller.DollarsBankController;
+import com.dollarsbank.model.Account;
 import com.dollarsbank.model.Customer;
+import com.dollarsbank.model.Transaction;
 
 public class AppComponents {
 	
@@ -58,7 +61,7 @@ public class AppComponents {
 		String phoneNumber = null;
 		String userId = null;
 		String password = null;
-		long initDeposit;
+		double initDeposit;
 		
 		System.out.println("Please enter your first name");
 		ConsolePrinterUtility.inputArrow();
@@ -77,6 +80,7 @@ public class AppComponents {
 				valid = true;
 			} else {
 				ConsolePrinterUtility.printInvalidPhoneNumber();
+				ConsolePrinterUtility.inputArrow();
 				String confirm = in.nextLine().trim();
 				if(confirm.equalsIgnoreCase("N")) {
 					return;
@@ -91,6 +95,7 @@ public class AppComponents {
 			userId = in.nextLine();
 			if(controller.checkIfUsernameExists(userId)) {
 				ConsolePrinterUtility.printUserExists();
+				ConsolePrinterUtility.inputArrow();
 				String confirm = in.nextLine().trim();
 				if(confirm.equalsIgnoreCase("N")) {
 					return;
@@ -111,7 +116,8 @@ public class AppComponents {
 			   password.length() >= 8) {
 				valid = true;
 			} else {
-				ConsolePrinterUtility.printInvalidPassword();;
+				ConsolePrinterUtility.printInvalidPassword();
+				ConsolePrinterUtility.inputArrow();
 				String confirm = in.nextLine().trim();
 				if(confirm.equalsIgnoreCase("N")) {
 					return;
@@ -121,13 +127,19 @@ public class AppComponents {
 		
 		System.out.println("How much money would you like to initially deposit");
 		ConsolePrinterUtility.inputArrow();
-		while(!in.hasNextLong() || (initDeposit = in.nextLong()) < 0) {
-			ConsolePrinterUtility.printInvalidAmount();
+		while(!in.hasNextDouble() || (initDeposit = in.nextDouble()) < 0) {
 			in.nextLine();
+			ConsolePrinterUtility.printInvalidAmount();
+			ConsolePrinterUtility.inputArrow();
+			String confirm = in.nextLine().trim();
+			if(confirm.equalsIgnoreCase("N")) {
+				return;
+			}
 			ConsolePrinterUtility.inputArrow();
 		}
 		Customer customer = controller.createCustomer(firstName, lastName, phoneNumber, userId, password, initDeposit);
 		customerMenu(customer, in);
+		ConsolePrinterUtility.success();
 	}
 	
 	private static void login(Scanner in) {
@@ -149,6 +161,7 @@ public class AppComponents {
 		if(customer == null) {
 			ConsolePrinterUtility.printInvalidLogin();
 		} else {
+			ConsolePrinterUtility.success();
 			customerMenu(customer, in);
 		}
 	}
@@ -170,14 +183,19 @@ public class AppComponents {
 				in.nextLine();
 				switch(input) { 
 					case 1 : 
+						customer.setAccount(deposit(in, customer.getAccount()));
 						break;
 					case 2 :
+						customer.setAccount(withdraw(in, customer.getAccount()));
 						break;
 					case 3 :
+						customer.setAccount(transfer(in, customer.getAccount()));
 						break;
 					case 4 :
+						viewTransactions(customer.getAccount());
 						break;
 					case 5 :
+						viewDetails(customer);
 						break;
 					case 6 :
 						logout = true;
@@ -194,5 +212,131 @@ public class AppComponents {
 			
 		}
 		
+	}
+	
+	public static Account deposit(Scanner in, Account account) {
+		
+		double amount = 0;
+		
+		System.out.println();
+		ConsolePrinterUtility.depositBanner();
+		System.out.println();
+		System.out.println("Please enter the amount you would like to deposit");
+		System.out.println("Current balance: " + account.getBalance());
+		ConsolePrinterUtility.inputArrow();
+		while(!in.hasNextDouble() || (amount = in.nextDouble()) < 0) {
+			in.nextLine();	
+			ConsolePrinterUtility.printInvalidAmount();
+			ConsolePrinterUtility.inputArrow();
+			String confirm = in.nextLine().trim();
+			if(confirm.equalsIgnoreCase("N")) {
+				return account;
+			}
+			ConsolePrinterUtility.inputArrow();
+		}
+		
+		account = controller.deposit(account, amount);
+
+		ConsolePrinterUtility.success();
+		return account;
+	}
+	
+	public static Account withdraw(Scanner in, Account account) {
+		
+		double amount = 0;
+		
+		System.out.println();
+		ConsolePrinterUtility.withdrawBanner();
+		System.out.println();
+		System.out.println("Please enter the amount you would like to withdraw");
+		System.out.println("Current balance: " + account.getBalance());
+		ConsolePrinterUtility.inputArrow();
+		while(!in.hasNextDouble() || (amount = in.nextDouble()) < 0 || amount > account.getBalance()) {
+			in.nextLine();	
+			ConsolePrinterUtility.printInvalidWithdrawal();;
+			ConsolePrinterUtility.inputArrow();
+			String confirm = in.nextLine().trim();
+			if(confirm.equalsIgnoreCase("N")) {
+				return account;
+			}
+			ConsolePrinterUtility.inputArrow();
+		}
+		
+		account = controller.withdraw(account, amount);
+
+		ConsolePrinterUtility.success();
+		return account;
+	}
+	
+	public static Account transfer(Scanner in, Account account1) {
+		
+		double amount = 0;
+		
+		System.out.println();
+		ConsolePrinterUtility.transferBanner();;
+		System.out.println();
+		System.out.println("Please enter username of the account you would like to transfer to");
+		boolean valid = false;
+		String userId = null;
+		while(!valid) {
+			ConsolePrinterUtility.inputArrow();
+			userId = in.nextLine();
+			if(!controller.checkIfUsernameExists(userId)) {
+				ConsolePrinterUtility.printUserDoesntExists();
+				ConsolePrinterUtility.inputArrow();
+				String confirm = in.nextLine().trim();
+				if(confirm.equalsIgnoreCase("N")) {
+					return account1;
+				}
+			} else {
+				valid = true;
+			}
+		}
+		Account account2 = controller.getAccount(userId);
+		
+		System.out.println("Please enter the amount you would like to transfer");
+		System.out.println("Current balance: " + account1.getBalance());
+		ConsolePrinterUtility.inputArrow();
+		while(!in.hasNextDouble() || (amount = in.nextDouble()) < 0 || amount > account1.getBalance()) {
+			in.nextLine();	
+			ConsolePrinterUtility.printInvalidWithdrawal();;
+			ConsolePrinterUtility.inputArrow();
+			String confirm = in.nextLine().trim();
+			if(confirm.equalsIgnoreCase("N")) {
+				return account1;
+			}
+			ConsolePrinterUtility.inputArrow();
+		}
+		
+		account1 = controller.transfer(account1, account2, amount);
+
+		ConsolePrinterUtility.success();
+		return account1;
+	}
+	
+	public static void viewTransactions(Account account) {
+		
+		System.out.println();
+		ConsolePrinterUtility.transactionBanner();
+		System.out.println();
+		
+		List<Transaction> transactions = account.getTransactions();
+		for(int i = 1; i < 5 && transactions.size() - i >= 0; i++) {
+			Transaction trans = transactions.get(transactions.size() - i);
+			System.out.println(i + ". " + trans.getType().VALUE + ": " + " $" + trans.getAmount() + " \t\t\t" + trans.getDate());
+		}
+	}
+	
+	public static void viewDetails(Customer customer) {
+		
+		System.out.println();
+		ConsolePrinterUtility.detailsBanner();
+		System.out.println();
+		
+		System.out.println("First name: " + customer.getFirstName());
+		System.out.println("Last name: " + customer.getLastName());
+		System.out.println("Phone number: " + customer.getPhoneNumber());
+		System.out.println("Username: " + customer.getUserId());
+		System.out.println("Account balance: " + customer.getAccount().getBalance());
 	}
 }

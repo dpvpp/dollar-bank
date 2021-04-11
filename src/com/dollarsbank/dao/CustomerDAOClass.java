@@ -39,6 +39,7 @@ public class CustomerDAOClass implements CustomerDAO{
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();
+			e.printStackTrace();
 		}
 		return null;
 		
@@ -65,6 +66,7 @@ public class CustomerDAOClass implements CustomerDAO{
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();
+			e.printStackTrace();
 		}
 		return customer;
 	}
@@ -88,6 +90,7 @@ public class CustomerDAOClass implements CustomerDAO{
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();
+			e.printStackTrace();
 		}
 		return exists;
 	}
@@ -103,12 +106,14 @@ public class CustomerDAOClass implements CustomerDAO{
 			st.setString(3, customer.getFirstName());
 			st.setString(4, customer.getLastName());
 			st.setString(5, customer.getPhoneNumber());
+			st.setString(6, customer.getUserId());
 
 			st.execute();
 			return customer;
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();
+			e.printStackTrace();
 		}
 		return null;
 		
@@ -126,6 +131,7 @@ public class CustomerDAOClass implements CustomerDAO{
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();
+			e.printStackTrace();
 		}
 		return false;
 	}

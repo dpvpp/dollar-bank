@@ -14,8 +14,8 @@ public class AccountDAOClass implements AccountDAO {
 	private static final String ADD = "INSERT INTO cust_account(balance, username) VALUES (?,?)";
 	private static final String SELECT_BY_ID = "SELECT * FROM cust_account WHERE account_id = ?";
 	private static final String SELECT_BY_USER = "SELECT * FROM cust_account WHERE username = ?";
-	private static final String UPDATE = "UPDATE cust_id SET balance = ? WHERE username = ?";
-	private static final String DELETE = "DELETE FROM cust_id WHERE  username = ?";
+	private static final String UPDATE = "UPDATE cust_account SET balance = ? WHERE username = ?";
+	private static final String DELETE = "DELETE FROM cust_account WHERE  username = ?";
 	
 	private Connection conn = null;
 	
@@ -30,7 +30,7 @@ public class AccountDAOClass implements AccountDAO {
 		try {
 			
 			PreparedStatement st = conn.prepareStatement(ADD);
-			st.setLong(1, account.getBalance());
+			st.setDouble(1, account.getBalance());
 			st.setString(2, account.getUserId());
 			
 			st.execute();
@@ -38,6 +38,7 @@ public class AccountDAOClass implements AccountDAO {
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();
+			e.printStackTrace();
 		}
 		return null;
 		
@@ -50,16 +51,17 @@ public class AccountDAOClass implements AccountDAO {
 		try {
 			
 			PreparedStatement st = conn.prepareStatement(SELECT_BY_ID);
-			st.setLong(1, id);
+			st.setInt(1, id);
 			
 			ResultSet rs = st.executeQuery();
 			
 			if(rs.next()) {
-				account = new Account(rs.getInt("account_id"), rs.getLong("balance"), rs.getString("username"));
+				account = new Account(rs.getInt("account_id"), rs.getDouble("balance"), rs.getString("username"));
 			}
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();
+			e.printStackTrace();
 		}
 		return account;
 		
@@ -77,11 +79,12 @@ public class AccountDAOClass implements AccountDAO {
 			ResultSet rs = st.executeQuery();
 			
 			if(rs.next()) {
-				account = new Account(rs.getInt("account_id"), rs.getLong("balance"), rs.getString("username"));
+				account = new Account(rs.getInt("account_id"), rs.getDouble("balance"), rs.getString("username"));
 			}
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();
+			e.printStackTrace();
 		}
 		return account;
 		
@@ -93,13 +96,15 @@ public class AccountDAOClass implements AccountDAO {
 		try {
 			
 			PreparedStatement st = conn.prepareStatement(UPDATE);
-			st.setString(1, account.getUserId());
+			st.setDouble(1, account.getBalance());
+			st.setString(2, account.getUserId());
 
 			st.execute();
 			return account;
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();
+			e.printStackTrace();
 		}
 		return null;
 		
@@ -118,6 +123,7 @@ public class AccountDAOClass implements AccountDAO {
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();
+			e.printStackTrace();
 		}
 		return false;
 		

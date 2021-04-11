@@ -9,6 +9,7 @@ public class DollarsBankApplication {
 		
 		System.out.println(ColorsUtility.BLUE.COLOR + "I'm blue da ba dee dabba da-ee" + ColorsUtility.RESET.COLOR);
 		AppComponents.mainMenu();
+		
 	}
 	
 }

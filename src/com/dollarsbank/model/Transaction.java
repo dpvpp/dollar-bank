@@ -5,11 +5,11 @@ import java.time.LocalDateTime;
 public class Transaction {
 	
 	public enum TransType {
-		DEPOSIT("deposit"), 
-		WITHDRAWAL("withdrawal"), 
-		INCOMING_TRANSFER("incoming transfer"), 
-		OUTGOING_TRANSFER("outgoing transfer"),
-		INITIAL_DEPOSIT("initial deposit");
+		DEPOSIT("Deposit"), 
+		WITHDRAWAL("Withdrawal"), 
+		INCOMING_TRANSFER("Incoming transfer"), 
+		OUTGOING_TRANSFER("Outgoing transfer"),
+		INITIAL_DEPOSIT("Initial deposit");
 		
 		public final String VALUE;
 		
@@ -20,11 +20,11 @@ public class Transaction {
 	
 	private int id;
 	private TransType type;
-	private long amount;
+	private double amount;
 	private LocalDateTime date;
 	private int accountId;
 	
-	public Transaction(int id, TransType type, long amount, LocalDateTime date, int accountId) {
+	public Transaction(int id, TransType type, double amount, LocalDateTime date, int accountId) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -33,7 +33,7 @@ public class Transaction {
 		this.accountId = accountId;
 	}
 
-	public Transaction(TransType type, long amount, int accountId) {
+	public Transaction(TransType type, double amount, int accountId) {
 		super();
 		this.type = type;
 		this.amount = amount;
@@ -49,7 +49,7 @@ public class Transaction {
 		return type;
 	}
 
-	public long getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
