@@ -31,8 +31,8 @@ public class TransactionDAOClass implements TransactionDAO {
 		try {
 			
 			PreparedStatement st = conn.prepareStatement(ADD);
-			st.setString(1, trans.getType().VALUE);
-			st.setLong(2, trans.getAmount());
+			st.setString(1, trans.getType().name());
+			st.setDouble(2, trans.getAmount());
 			st.setTimestamp(3, Timestamp.valueOf(trans.getDate()));
 			st.setInt(4, trans.getAccountId());
 
@@ -41,6 +41,7 @@ public class TransactionDAOClass implements TransactionDAO {
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -52,20 +53,21 @@ public class TransactionDAOClass implements TransactionDAO {
 		try {
 			
 			PreparedStatement st = conn.prepareStatement(SELECT_BY_ID);
-			st.setLong(1, id);
+			st.setInt(1, id);
 			
 			ResultSet rs = st.executeQuery();
 			
 			if(rs.next()) {
 				trans = new Transaction(rs.getInt("trans_id"),
 										TransType.valueOf(rs.getString("trans_type")), 
-										rs.getLong("amount"), 
-										rs.getTimestamp("trans_time").toLocalDateTime(), 
+										rs.getDouble("amount"), 
+										rs.getTimestamp("trans_date").toLocalDateTime(), 
 										rs.getInt("account_id"));
 			}
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();
+			e.printStackTrace();
 		}
 		return trans;
 		
@@ -78,20 +80,21 @@ public class TransactionDAOClass implements TransactionDAO {
 		try {
 			
 			PreparedStatement st = conn.prepareStatement(SELECT_BY_ACCT);
-			st.setLong(1, id);
+			st.setInt(1, id);
 			
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
 				transactions.add(new Transaction(rs.getInt("trans_id"),
 										         TransType.valueOf(rs.getString("trans_type")), 
-										         rs.getLong("amount"), 
-										         rs.getTimestamp("trans_time").toLocalDateTime(), 
+										         rs.getDouble("amount"), 
+										         rs.getTimestamp("trans_date").toLocalDateTime(), 
 										         rs.getInt("account_id")));
 			}
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();
+			e.printStackTrace();
 		}
 		return transactions;
 		
@@ -110,6 +113,7 @@ public class TransactionDAOClass implements TransactionDAO {
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();
+			e.printStackTrace();
 		}
 		return false;
 

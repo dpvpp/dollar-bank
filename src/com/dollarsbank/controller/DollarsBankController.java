@@ -23,7 +23,7 @@ public class DollarsBankController {
 		transDAO = new TransactionDAOClass();
 	}
 	
-	public Customer createCustomer(String firstName, String lastName, String phoneNumber, String userId, String password, long initDeposit) {
+	public Customer createCustomer(String firstName, String lastName, String phoneNumber, String userId, String password, double initDeposit) {
 		
 		Customer customer = new Customer(firstName, lastName, phoneNumber, userId, password, initDeposit);
 		
@@ -81,7 +81,11 @@ public class DollarsBankController {
 		return false;
 	}
 	
-	public Account deposit(Account acct, long amount) {
+	public Account getAccount(String username) {
+		return acctDAO.getAccountByUserName(username);
+	}
+	
+	public Account deposit(Account acct, double amount) {
 		
 		acct.deposit(amount);
 		
@@ -93,7 +97,7 @@ public class DollarsBankController {
 		
 	}
 	
-	public Account widthdraw(Account acct, long amount) {
+	public Account withdraw(Account acct, double amount) {
 		
 		acct.withdraw(amount);
 		
@@ -105,17 +109,17 @@ public class DollarsBankController {
 		
 	}
 	
-	public Account transfer(Account acct1, Account acct2, long amount) {
+	public Account transfer(Account acct1, Account acct2, double amount) {
 		
 		acct1.withdraw(amount);
 		acct2.deposit(amount);
 		
 		acct1 = acctDAO.updateAccount(acct1);
-		transDAO.addTransaction(new Transaction(TransType.WITHDRAWAL, amount, acct1.getId()));
+		transDAO.addTransaction(new Transaction(TransType.OUTGOING_TRANSFER, amount, acct1.getId()));
 		acct1.setTransaction(transDAO.getTransActionsByAccountId(acct1.getId()));
 		
 		acct2 = acctDAO.updateAccount(acct2);
-		transDAO.addTransaction(new Transaction(TransType.DEPOSIT, amount, acct2.getId()));
+		transDAO.addTransaction(new Transaction(TransType.INCOMING_TRANSFER, amount, acct2.getId()));
 		acct2.setTransaction(transDAO.getTransActionsByAccountId(acct2.getId()));
 		
 		return acct1;

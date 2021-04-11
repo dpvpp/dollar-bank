@@ -34,7 +34,37 @@ public class ConsolePrinterUtility {
 	}
 	
 	public static void printInvalidAmount() {
-		System.out.println(ColorsUtility.RED.COLOR + "WARNING! Please enter a valid amount" + ColorsUtility.RESET.COLOR);
+		System.out.println(ColorsUtility.RED.COLOR + "WARNING! You have entered an invalid amount try again? (Y/N)" + ColorsUtility.RESET.COLOR);
+	}
+	
+	public static void depositBanner() {
+		System.out.println(ColorsUtility.BLUE.COLOR + "+---------+");
+		System.out.println("| Deposit |");
+		System.out.println("+---------+" + ColorsUtility.RESET.COLOR);
+	}
+	
+	public static void withdrawBanner() {
+		System.out.println(ColorsUtility.BLUE.COLOR + "+-----------+");
+		System.out.println("| Widthdraw |");
+		System.out.println("+-----------+" + ColorsUtility.RESET.COLOR);
+	}
+	
+	public static void transferBanner() {
+		System.out.println(ColorsUtility.BLUE.COLOR + "+----------+");
+		System.out.println("| Transfer |");
+		System.out.println("+----------+" + ColorsUtility.RESET.COLOR);
+	}
+	
+	public static void transactionBanner() {
+		System.out.println(ColorsUtility.BLUE.COLOR + "+---------------------+");
+		System.out.println("| Last 5 transactions |");
+		System.out.println("+---------------------+" + ColorsUtility.RESET.COLOR);
+	}
+	
+	public static void detailsBanner() {
+		System.out.println(ColorsUtility.BLUE.COLOR + "+--------------+");
+		System.out.println("| Your details |");
+		System.out.println("+--------------+" + ColorsUtility.RESET.COLOR);
 	}
 	
 	public static void loginBanner() {
@@ -60,7 +90,11 @@ public class ConsolePrinterUtility {
 	}
 	
 	public static void printUserExists() {
-		System.out.println(ColorsUtility.RED.COLOR + "The username you have chose already exists, try again? (Y/N)" + ColorsUtility.RESET.COLOR);
+		System.out.println(ColorsUtility.RED.COLOR + "The username you have chosen already exists, try again? (Y/N)" + ColorsUtility.RESET.COLOR);
+	}
+	
+	public static void printUserDoesntExists() {
+		System.out.println(ColorsUtility.RED.COLOR + "The username you have chosen doesn't exist, try again? (Y/N)" + ColorsUtility.RESET.COLOR);
 	}
 	
 	public static void printInvalidPassword() {
@@ -90,6 +124,14 @@ public class ConsolePrinterUtility {
 	
 	public static void signOut() {
 		System.out.println(ColorsUtility.GREEN.COLOR + "Signing out, please return soon and deposit more money" + ColorsUtility.RESET.COLOR);
+	}
+	
+	public static void success() {
+		System.out.println(ColorsUtility.GREEN.COLOR + "Great success!" + ColorsUtility.RESET.COLOR);
+	}
+	
+	public static void printInvalidWithdrawal() {
+		System.out.println(ColorsUtility.RED.COLOR + "WARNING! You have entered an invalid amount. Please make sure the amount you enter is a non negative number less than or equal to your current balance, try again? (Y/N)" + ColorsUtility.RESET.COLOR);
 	}
 	
 	public static void inputArrow() {
