@@ -28,7 +28,10 @@ public class DollarsBankController {
 		Customer customer = new Customer(firstName, lastName, phoneNumber, userId, password, initDeposit);
 		
 		customer = custDAO.addCustomer(customer);
-		customer.setAccount(acctDAO.addAccount(customer.getAccount()));
+		Account acct = acctDAO.addAccount(customer.getAccount());
+		transDAO.addTransaction(new Transaction(TransType.INITIAL_DEPOSIT, initDeposit, acct.getId()));
+		acct.setTransaction(transDAO.getTransActionsByAccountId(acct.getId()));
+		customer.setAccount(acct);
 		
 		return customer;
 		

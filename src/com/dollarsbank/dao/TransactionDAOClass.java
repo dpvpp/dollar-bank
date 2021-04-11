@@ -35,10 +35,9 @@ public class TransactionDAOClass implements TransactionDAO {
 			st.setLong(2, trans.getAmount());
 			st.setTimestamp(3, Timestamp.valueOf(trans.getDate()));
 			st.setInt(4, trans.getAccountId());
-			
-			if(st.execute()) {
-				return trans;
-			}
+
+			st.execute();
+			return trans;
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();
@@ -106,7 +105,8 @@ public class TransactionDAOClass implements TransactionDAO {
 			PreparedStatement st = conn.prepareStatement(DELETE);
 			st.setInt(1, id);
 			
-			return st.execute();
+			st.execute();
+			return true;
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();

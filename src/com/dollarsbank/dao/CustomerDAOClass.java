@@ -34,9 +34,8 @@ public class CustomerDAOClass implements CustomerDAO{
 			st.setString(4, customer.getLastName());
 			st.setString(5, customer.getPhoneNumber());
 			
-			if(st.execute()) {
-				return customer;
-			}
+			st.execute();
+			return customer;
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();
@@ -104,10 +103,9 @@ public class CustomerDAOClass implements CustomerDAO{
 			st.setString(3, customer.getFirstName());
 			st.setString(4, customer.getLastName());
 			st.setString(5, customer.getPhoneNumber());
-			
-			if(st.execute()) {
-				return customer;
-			}
+
+			st.execute();
+			return customer;
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();
@@ -123,7 +121,8 @@ public class CustomerDAOClass implements CustomerDAO{
 			PreparedStatement st = conn.prepareStatement(DELETE);
 			st.setString(1, username);
 
-			return st.execute();
+			st.execute();
+			return true;
 			
 		} catch (SQLException e) {
 			ConsolePrinterUtility.printSQLError();
