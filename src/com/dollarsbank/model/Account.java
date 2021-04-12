@@ -3,11 +3,14 @@ package com.dollarsbank.model;
 import java.util.ArrayList;
 import java.util.List;
 
+//Account model class
 public class Account {
 	
 	private int id;
 	private double balance;
+	//List that contains all the transactions
 	private List<Transaction> transactions;
+	//UserId is the primary way of finding account
 	private String userId;
 	
 	public Account() {
@@ -22,6 +25,7 @@ public class Account {
 		this.userId = userId;
 	}
 	
+	//Since sometimes accounts need to made without ids this constructor is necessary
 	Account(double initBalance, String userId) {
 		this.transactions = new ArrayList<Transaction>();
 		this.balance = initBalance;
@@ -33,6 +37,7 @@ public class Account {
 		return this.balance;
 	}
 	
+	//Balance is set by deposits and withdrawals
 	public double withdraw(double amount) {
 		this.balance -= amount;
 		return amount;
@@ -60,6 +65,12 @@ public class Account {
 
 	public int getId() {
 		return id;
+	}
+
+	@Override
+	public String toString() {
+		return "Account [id=" + id + ", balance=" + balance + ", transactions=" + transactions + ", userId=" + userId
+				+ "]";
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.dollarsbank.utility;
 
+//Contains several print statements that are used throughout the application
 public class ConsolePrinterUtility {
 	
 	public static void welcomeScreen() {

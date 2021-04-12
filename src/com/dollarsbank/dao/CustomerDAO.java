@@ -2,6 +2,7 @@ package com.dollarsbank.dao;
 
 import com.dollarsbank.model.Customer;
 
+//Customer DAO interface
 public interface CustomerDAO {
 	
 	public Customer addCustomer(Customer customer);

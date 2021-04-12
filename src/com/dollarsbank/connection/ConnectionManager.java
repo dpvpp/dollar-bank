@@ -6,12 +6,14 @@ import java.sql.SQLException;
 
 public class ConnectionManager {
 	
+	//Change database credentials here
 	private static final String URL = "jdbc:mysql://localhost:3206/dollar_bank";
 	private static final String USER = "root";
 	private static final String PASS = "root";
 	
 	private static Connection conn = null;
 
+	//Make connection
 	private static void makeConnection() {
 		
 		try {
@@ -28,6 +30,7 @@ public class ConnectionManager {
 		
 	}
 	
+	//Get connection
 	public static Connection getConnection() {
 		if(conn == null) {
 			makeConnection();

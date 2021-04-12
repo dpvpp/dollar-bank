@@ -1,5 +1,6 @@
 package com.dollarsbank.model;
 
+//Customer model class
 public class Customer {
 	
 	private String firstName;
@@ -7,6 +8,7 @@ public class Customer {
 	private String phoneNumber;
 	private String userId;
 	private String password;
+	//Stores the cusstomer's account
 	private Account account;
 	
 	public Customer(String firstName, String lastName, String phoneNumber, String userId, String password, double initDeposit) {
@@ -65,6 +67,12 @@ public class Customer {
 
 	public void setAccount(Account account) {
 		this.account = account;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber
+				+ ", userId=" + userId + ", account=" + account + "]";
 	}
 	
 }

@@ -14,7 +14,8 @@ import com.dollarsbank.model.Transaction.TransType;
 import com.dollarsbank.utility.ConsolePrinterUtility;
 
 public class TransactionDAOClass implements TransactionDAO {
-
+	
+	//Queries for the transaction table
 	private static final String ADD = "INSERT INTO transaction(trans_type, amount, trans_date, account_id) VALUES (?,?,?,?)";
 	private static final String SELECT_BY_ID = "SELECT * FROM transaction WHERE trans_id = ?";
 	private static final String SELECT_BY_ACCT = "SELECT * FROM transaction WHERE account_id = ?";
@@ -22,15 +23,18 @@ public class TransactionDAOClass implements TransactionDAO {
 	
 	private Connection conn = null;
 	
+	//Sets up a connection each time the class is instantiated
 	public TransactionDAOClass() {
 		conn = ConnectionManager.getConnection();
 	}
 	
 	@Override
+	//Adds a transaction to the database
 	public Transaction addTransaction(Transaction trans) {
 		try {
 			
 			PreparedStatement st = conn.prepareStatement(ADD);
+			//JDBC does not support enums so strings are used in the database
 			st.setString(1, trans.getType().name());
 			st.setDouble(2, trans.getAmount());
 			st.setTimestamp(3, Timestamp.valueOf(trans.getDate()));
@@ -47,6 +51,7 @@ public class TransactionDAOClass implements TransactionDAO {
 	}
 
 	@Override
+	//Gets a transaction by id, never used in this project
 	public Transaction getTransactionById(int id) {
 		
 		Transaction trans = null;
@@ -74,6 +79,7 @@ public class TransactionDAOClass implements TransactionDAO {
 	}
 
 	@Override
+	//Gets all the transactions for an account, primary way of getting the transactions
 	public List<Transaction> getTransActionsByAccountId(int id) {
 		
 		List<Transaction> transactions = new ArrayList<Transaction>();
@@ -101,7 +107,8 @@ public class TransactionDAOClass implements TransactionDAO {
 	}
 
 	@Override
-	public boolean deleteTranactionById(int id) {
+	//delete transactions from database using account id, it is not used
+	public boolean deleteTransactionById(int id) {
 
 		try {
 			
