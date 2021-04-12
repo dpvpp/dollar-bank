@@ -11,6 +11,7 @@ import com.dollarsbank.utility.ConsolePrinterUtility;
 
 public class CustomerDAOClass implements CustomerDAO{
 
+	//SQL queries for customer
 	private static final String ADD = "INSERT INTO customer(username, cust_pw, firstname, lastname, phone) VALUES (?,?,?,?,?)";
 	private static final String SELECT_BY_ID = "SELECT * FROM customer WHERE username = ?";
 	private static final String UPDATE = "UPDATE customer SET username = ?, cust_pw = ?, firstname = ?, lastname = ?, phone = ? WHERE username = ?";
@@ -18,11 +19,13 @@ public class CustomerDAOClass implements CustomerDAO{
 	
 	private Connection conn = null;
 	
+	//Creates a connection to the databse each time a new instance is created
 	public CustomerDAOClass() {
 		conn = ConnectionManager.getConnection();
 	}
 	
 	@Override
+	//Adds a customer to the database
 	public Customer addCustomer(Customer customer) {
 		
 		try {
@@ -46,6 +49,7 @@ public class CustomerDAOClass implements CustomerDAO{
 	}
 
 	@Override
+	//Gets a customer by username
 	public Customer getCustomerByUserName(String username) {
 		
 		Customer customer = null;
@@ -74,6 +78,7 @@ public class CustomerDAOClass implements CustomerDAO{
 
 
 	@Override
+	//Checks if a customer exists
 	public boolean existsByUserName(String username) {
 
 		boolean exists = false;
@@ -96,6 +101,7 @@ public class CustomerDAOClass implements CustomerDAO{
 	}
 
 	@Override
+	//Update a customer, not used in this particular project
 	public Customer updateCustomer(Customer customer) {
 		
 		try {
@@ -120,6 +126,7 @@ public class CustomerDAOClass implements CustomerDAO{
 	}
 
 	@Override
+	//Delete a customer, also not used in this project
 	public boolean deleteCustomerByUserName(String username) {
 		try {
 			

@@ -2,6 +2,7 @@ package com.dollarsbank.dao;
 
 import com.dollarsbank.model.Account;
 
+//Account DAO interface
 public interface AccountDAO {
 	
 	public Account addAccount(Account account);

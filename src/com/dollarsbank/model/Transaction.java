@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public class Transaction {
 	
+	//Enum with all the transaction types
 	public enum TransType {
 		DEPOSIT("Deposit"), 
 		WITHDRAWAL("Withdrawal"), 
@@ -60,6 +61,11 @@ public class Transaction {
 	public int getAccountId() {
 		return accountId;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Transaction [id=" + id + ", type=" + type + ", amount=" + amount + ", date=" + date + ", accountId="
+				+ accountId + "]";
+	}
 	
 }

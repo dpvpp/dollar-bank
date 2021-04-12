@@ -11,6 +11,7 @@ import com.dollarsbank.utility.ConsolePrinterUtility;
 
 public class AccountDAOClass implements AccountDAO {
 
+	//Sets up SQL queries
 	private static final String ADD = "INSERT INTO cust_account(balance, username) VALUES (?,?)";
 	private static final String SELECT_BY_ID = "SELECT * FROM cust_account WHERE account_id = ?";
 	private static final String SELECT_BY_USER = "SELECT * FROM cust_account WHERE username = ?";
@@ -19,12 +20,14 @@ public class AccountDAOClass implements AccountDAO {
 	
 	private Connection conn = null;
 	
+	//Sets up connection to db when a new instance is created
 	public AccountDAOClass() {
 		conn = ConnectionManager.getConnection();
 	}
 	
 	
 	@Override
+	//Add an account to the database
 	public Account addAccount(Account account) {
 		
 		try {
@@ -34,6 +37,7 @@ public class AccountDAOClass implements AccountDAO {
 			st.setString(2, account.getUserId());
 			
 			st.execute();
+			//gets newly inserted account with username in order to return account with account_id
 			return getAccountByUserName(account.getUserId());
 			
 		} catch (SQLException e) {
@@ -45,6 +49,7 @@ public class AccountDAOClass implements AccountDAO {
 	}
 
 	@Override
+	//Get account by id
 	public Account getAccountById(int id) {
 		
 		Account account = null;
@@ -68,6 +73,7 @@ public class AccountDAOClass implements AccountDAO {
 	}
 
 	@Override
+	//Get account with username, primary method for getting account
 	public Account getAccountByUserName(String username) {
 		
 		Account account = null;
@@ -91,6 +97,7 @@ public class AccountDAOClass implements AccountDAO {
 	}
 
 	@Override
+	//Update account updates the balance only, for deposits and withdrawals
 	public Account updateAccount(Account account) {
 		
 		try {
@@ -111,6 +118,7 @@ public class AccountDAOClass implements AccountDAO {
 	}
 
 	@Override
+	//Deletes account using username
 	public boolean deleteAccountByUser(String username) {
 		
 		try {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.dollarsbank.model.Transaction;
 
+//Transaction DAO interface
 public interface TransactionDAO {
 	
 	public Transaction addTransaction(Transaction trans);
@@ -13,6 +14,6 @@ public interface TransactionDAO {
 	
 	//Transactions will never be updated
 	
-	public boolean deleteTranactionById(int id);
+	public boolean deleteTransactionById(int id);
 	
 }
